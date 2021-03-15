@@ -1,0 +1,15 @@
+{
+  "references": [
+    {
+      "path": "packages/core"
+    },
+    {
+      "path": "packages/ws"
+    }
+  ],
+  "files": [],
+  "include": [],
+  "exclude": [
+    "**/node_modules"
+  ]
+}

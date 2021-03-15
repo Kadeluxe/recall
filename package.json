@@ -1,0 +1,12 @@
+{
+  "name": "recall",
+  "version": "1.0.0",
+  "license": "MIT",
+  "private": true,
+  "workspaces": [
+    "packages/*"
+  ],
+  "devDependencies": {
+    "typescript": "^4.1.3"
+  }
+}
