@@ -1,0 +1,27 @@
+{
+  "name": "@kadeluxe/recall-event-manager",
+  "version": "0.3.0",
+  "description": "Networked Event Emitter for Recall stack",
+  "author": "Kadeluxe",
+  "license": "MIT",
+  "main": "dist/index.js",
+  "browser": "dist/browser.js",
+  "types": "dist/index.d.ts",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Kadeluxe/recall.git",
+    "directory": "packages/event-manager"
+  },
+  "scripts": {
+    "build": "ttsc -b"
+  },
+  "dependencies": {
+  },
+  "peerDependencies": {
+    "@kadeluxe/recall-core": "workspace:*"
+  },
+  "devDependencies": {
+    "@kadeluxe/recall-core": "workspace:*",
+    "@types/node": "^15.12.5"
+  }
+}

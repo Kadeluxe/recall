@@ -1,8 +1,5 @@
-npm-debug.log*
-yarn-debug.log*
-yarn-error.log*
-node_modules/
-*.tsbuildinfo
-.yarn-integrity
-dist
 .idea
+node_modules/
+dist
+*.tsbuildinfo
+pnpm-lock.yaml

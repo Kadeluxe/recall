@@ -1,15 +1,31 @@
 {
-  "name": "@recall/core",
-  "version": "1.0.0",
-  "description": "Recall — RPC framework",
-  "main": "dist/index.js",
-  "types": "dist/index.d.ts",
+  "name": "@kadeluxe/recall-core",
+  "version": "0.3.0",
+  "description": "Recall — TypeScript RPC library; core functions",
   "author": "Kadeluxe",
   "license": "MIT",
+  "main": "dist/index.js",
+  "browser": "dist/browser.js",
+  "types": "dist/index.d.ts",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Kadeluxe/recall.git",
+    "directory": "packages/core"
+  },
+  "scripts": {
+    "build": "ttsc -b"
+  },
   "dependencies": {
+    "@kadeluxe/async-task": "^1.0.0",
+    "debug": "^4.3.2",
+    "lodash": "^4.17.21",
     "reflect-metadata": "^0.1.13",
-    "@decorize/bind": "^1.0.3",
-    "lodash": "^4.17.20",
     "ts-custom-error": "^3.2.0"
+  },
+  "devDependencies": {
+    "@types/debug": "^4.1.7",
+    "@types/lodash": "^4.14.171",
+    "@types/node": "^16.4.7",
+    "ts-essentials": "^7.0.2"
   }
 }

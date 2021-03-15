@@ -1,18 +1,32 @@
 {
-  "name": "@recall/ws",
-  "version": "1.0.0",
-  "description": "Recall — RPC framework",
-  "main": "dist/index.js",
-  "types": "dist/index.d.ts",
+  "name": "@kadeluxe/recall-ws",
+  "version": "0.3.0",
+  "description": "Recall — TypeScript RPC library; WebSocket client and server",
   "author": "Kadeluxe",
   "license": "MIT",
-  "private": false,
+  "main": "dist/index.js",
+  "browser": "dist/browser.js",
+  "types": "dist/index.d.ts",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Kadeluxe/recall.git",
+    "directory": "packages/ws"
+  },
+  "scripts": {
+    "build": "ttsc -b"
+  },
   "dependencies": {
-    "@recall/core": "1.0.0",
-    "@decorize/bind": "^1.0.3",
-    "ws": "^7.4.4"
+    "debug": "^4.3.2",
+    "lodash": "^4.17.21"
+  },
+  "peerDependencies": {
+    "@kadeluxe/recall-core": "workspace:*",
+    "ws": "^8.0.0"
   },
   "devDependencies": {
-    "@types/ws": "^7.4.0"
+    "@kadeluxe/recall-core": "workspace:*",
+    "@types/lodash": "^4.14.171",
+    "@types/ws": "^7.4.7",
+    "ts-essentials": "^7.0.2"
   }
 }

@@ -1,0 +1,6 @@
+packages:
+  - 'packages/core'
+  - 'packages/tcp'
+  - 'packages/ws'
+  - 'packages/event-manager'
+  - 'packages/validation'

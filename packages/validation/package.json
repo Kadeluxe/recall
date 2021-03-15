@@ -1,0 +1,26 @@
+{
+  "name": "@kadeluxe/recall-validation",
+  "version": "0.3.0",
+  "description": "Validation middleware for Recall services",
+  "author": "Kadeluxe",
+  "license": "MIT",
+  "main": "dist/index.js",
+  "browser": "dist/browser.js",
+  "types": "dist/index.d.ts",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Kadeluxe/recall.git",
+    "directory": "packages/validation"
+  },
+  "scripts": {
+    "build": "ttsc -b"
+  },
+  "peerDependencies": {
+    "@kadeluxe/recall-core": "workspace:*",
+    "joi": "^17.4.2"
+  },
+  "devDependencies": {
+    "@kadeluxe/recall-core": "workspace:*",
+    "joi": "^17.4.2"
+  }
+}

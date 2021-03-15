@@ -1,15 +1,20 @@
 {
+  "files": [],
   "references": [
     {
       "path": "packages/core"
     },
     {
+      "path": "packages/tcp"
+    },
+    {
       "path": "packages/ws"
+    },
+    {
+      "path": "packages/event-manager"
+    },
+    {
+      "path": "packages/validation"
     }
-  ],
-  "files": [],
-  "include": [],
-  "exclude": [
-    "**/node_modules"
   ]
 }

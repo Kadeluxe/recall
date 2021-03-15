@@ -1,0 +1,29 @@
+{
+  "extends": "../tsconfig.common.json",
+  "compilerOptions": {
+    "rootDir": "src",
+    "outDir": "dist",
+    "baseUrl": ".",
+    "paths": {
+      "~/*": [
+        "./src/*"
+      ],
+      "@kadeluxe/recall-core": [
+        "../core/src"
+      ]
+    },
+    "plugins": [
+      {
+        "transform": "@zerollup/ts-transform-paths",
+        "exclude": [
+          "@kadeluxe/recall-core"
+        ]
+      }
+    ]
+  },
+  "references": [
+    {
+      "path": "../core"
+    }
+  ]
+}
