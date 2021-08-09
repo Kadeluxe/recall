@@ -24,7 +24,7 @@ export class ServerChannelWs<Context> extends AbstractServerChannel<Context> {
     this.onSocketData = this.onSocketData.bind(this);
     this.onSocketClose = this.onSocketClose.bind(this);
 
-    _socket.on("message", this.onSocketData as any); // TODO: check typings
+    _socket.on("message", this.onSocketData);
     _socket.once("close", this.onSocketClose);
   }
 
