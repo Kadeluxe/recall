@@ -37,6 +37,12 @@ function isRequestError(value: unknown): value is TRequestError {
   return Array.isArray(value) && value[0] == RequestError;
 }
 
+export const enum ChannelCloseReason {
+  Normal,
+  HandshakeError,
+  Timeout,
+}
+
 export abstract class AbstractChannel<Context = unknown> implements IRequestSender {
   protected readonly _requests = new Map<number, IPendingRequest>();
   protected readonly _queue = new Set<IRequestMessage>();
@@ -56,7 +62,7 @@ export abstract class AbstractChannel<Context = unknown> implements IRequestSend
     return this._state;
   }
 
-  public abstract close(): void;
+  public abstract close(reason: ChannelCloseReason): void;
 
   public call<T>(service: string): T {
     return createInvokeContext(this, service, true);

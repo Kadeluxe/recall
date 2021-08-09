@@ -1,4 +1,9 @@
-import {AbstractClient, AbstractClientOptions, DefaultAbstractClientOptions} from "@kadeluxe/recall-core";
+import {
+  AbstractClient,
+  AbstractClientOptions,
+  ChannelCloseReason,
+  DefaultAbstractClientOptions
+} from "@kadeluxe/recall-core";
 import {IWebSocketLikeConstructor} from "~/common/IWebSocketLike";
 import {ClientChannel} from "~/client/ClientChannel";
 import {DeepRequired} from "ts-essentials";
@@ -28,6 +33,6 @@ export class RecallWsClient extends AbstractClient {
   }
 
   public stop() {
-    this.channel.close();
+    this.channel.close(ChannelCloseReason.Normal);
   }
 }

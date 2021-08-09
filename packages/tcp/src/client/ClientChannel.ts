@@ -1,5 +1,6 @@
 import {
   AbstractClientChannel,
+  ChannelCloseReason,
   ChannelState,
   INotificationMessage,
   IRequestMessage,
@@ -40,7 +41,7 @@ export class ClientChannel extends AbstractClientChannel<undefined> {
     this.socket.connect(this._options.socket);
   }
 
-  public close() {
+  public close(reason: ChannelCloseReason) {
     this.socket.destroy();
   }
 

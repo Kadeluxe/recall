@@ -1,7 +1,12 @@
 import * as net from "net";
 import {DeepRequired} from "ts-essentials";
 import _, {defaultsDeep} from "lodash";
-import {AbstractClient, AbstractClientOptions, DefaultAbstractClientOptions} from "@kadeluxe/recall-core";
+import {
+  AbstractClient,
+  AbstractClientOptions,
+  ChannelCloseReason,
+  DefaultAbstractClientOptions
+} from "@kadeluxe/recall-core";
 import {ClientChannel} from "~/index";
 
 export type TcpClientOptions = {
@@ -30,7 +35,7 @@ export class RecallTcpClient extends AbstractClient {
   }
 
   public stop() {
-    this.channel.close();
+    this.channel.close(ChannelCloseReason.Normal);
     return;
   }
 

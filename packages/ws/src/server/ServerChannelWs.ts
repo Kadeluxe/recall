@@ -1,6 +1,6 @@
 import {
   AbstractServerChannel,
-  captureRequestContext,
+  captureRequestContext, ChannelCloseReason,
   ChannelState,
   INotificationMessage,
   IRequestMessage,
@@ -27,7 +27,7 @@ export class ServerChannelWs<Context> extends AbstractServerChannel<Context> {
     _socket.once("close", this.onSocketClose);
   }
 
-  public close(): void {
+  public close(reason: ChannelCloseReason): void {
     this._socket.close();
   }
 

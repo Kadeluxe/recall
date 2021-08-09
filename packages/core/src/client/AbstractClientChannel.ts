@@ -1,4 +1,4 @@
-import {AbstractChannel, ChannelState} from "~/channel/AbstractChannel";
+import {AbstractChannel, ChannelCloseReason, ChannelState} from "~/channel/AbstractChannel";
 import {ServiceDispatcher} from "~/dispatcher/ServiceDispatcher";
 import {IHandshakeResponse, IServerChannelService} from "~/server/ServerChannelService";
 import {RecallServiceChannelId} from "~/common/const";
@@ -35,7 +35,7 @@ export abstract class AbstractClientChannel<Context = unknown> extends AbstractC
     super.setChannelState(state);
 
     if (state == ChannelState.Connected) {
-      this.call<IServerChannelService>(RecallServiceChannelId).handshake({}).then(this.onHandshakeResponse).catch(() => this.close());
+      this.call<IServerChannelService>(RecallServiceChannelId).handshake({}).then(this.onHandshakeResponse).catch(() => this.close(ChannelCloseReason.HandshakeError));
     } else if (state == ChannelState.Ready) {
       this.resetPingTimeout();
     } else if (state == ChannelState.Disconnected) {
@@ -52,6 +52,6 @@ export abstract class AbstractClientChannel<Context = unknown> extends AbstractC
   }
 
   protected onPingTimeout() {
-    this.close();
+    this.close(ChannelCloseReason.Timeout);
   }
 }

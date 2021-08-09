@@ -10,6 +10,7 @@ import {AbstractServerChannel} from "~/server/AbstractServerChannel";
 import {ChannelGroup} from "~/server/ChannelGroup";
 import {IClientChannelService} from "~/client/ClientChannelService";
 import {RecallServiceChannelId} from "~/common/const";
+import {ChannelCloseReason} from "~/channel/AbstractChannel";
 
 type EventMap = {
   "client:connect": (client: AbstractServerChannel<any>) => void,
@@ -74,7 +75,7 @@ export abstract class AbstractServer<Context = unknown> {
   public onPingTimeout() {
     for (const it of this._clients) {
       if (it.lastPingResponse < this._lastPingSendTime) {
-        it.close();
+        it.close(ChannelCloseReason.Timeout);
       }
     }
   }

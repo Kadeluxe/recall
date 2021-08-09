@@ -1,7 +1,7 @@
 import * as net from "net";
 import {
   AbstractServerChannel,
-  captureRequestContext,
+  captureRequestContext, ChannelCloseReason,
   ChannelState,
   INotificationMessage,
   IRequestMessage,
@@ -40,7 +40,7 @@ export class ServerChannelTcp<Context> extends AbstractServerChannel<Context> {
     this._encoder.pipe(this._socket);
   }
 
-  public close() {
+  public close(reason: ChannelCloseReason) {
     this._socket.destroy();
   }
 
