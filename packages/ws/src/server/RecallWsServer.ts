@@ -5,20 +5,24 @@ import {ServerChannelWs} from "~/server/ServerChannelWs";
 import {IncomingMessage} from "http";
 import _ from "lodash";
 
-export type WsServerOptions = {} & AbstractServerOptions;
-export type WsServerOptionsFull = DeepRequired<WsServerOptions>;
-export const DefaultWsServerOptions: WsServerOptionsFull = _.merge(
-  {},
+export type WsServerOptions<Context> = AbstractServerOptions & {
+  contextFactory?: (socket: WebSocket, req: IncomingMessage) => Promise<Context> | Context;
+};
+export type WsServerOptionsFull<Context> = DeepRequired<WsServerOptions<Context>>;
+export const DefaultWsServerOptions: WsServerOptionsFull<any> = _.merge(
+  {
+    contextFactory: () => undefined,
+  },
   DefaultAbstractServerOptions,
 );
 
 export class RecallWsServer<Context = unknown> extends AbstractServer<Context> {
   declare protected _clients: Set<ServerChannelWs<Context>>;
-  public readonly options: WsServerOptionsFull;
+  public readonly options: WsServerOptionsFull<Context>;
 
   public constructor(
     protected readonly _server: WebSocket.Server,
-    options: WsServerOptions = {}
+    options: WsServerOptions<Context> = {}
   ) {
     super(options);
     this.options = _.defaultsDeep(options, DefaultWsServerOptions);
@@ -43,7 +47,8 @@ export class RecallWsServer<Context = unknown> extends AbstractServer<Context> {
   }
 
   protected async onClientConnect(socket: WebSocket, req: IncomingMessage) {
-    const client = new ServerChannelWs<Context>(socket, this, {} as any, this._dispatcher, this.options);
+    const context = await this.options.contextFactory(socket, req);
+    const client = new ServerChannelWs<Context>(socket, this, context, this._dispatcher, this.options);
     this._clients.add(client);
 
     socket.once("close", () => this.onClientDisconnect(client));

@@ -2,14 +2,14 @@ import {AbstractChannelOptions, DefaultAbstractChannelOptions} from "~/channel/o
 import merge from "lodash/merge";
 import {DeepRequired} from "ts-essentials";
 
-export type AbstractClientOptions = {
+export type AbstractClientOptions = AbstractChannelOptions & {
   connection?: {
     reconnect?: {
       initialDelay?: number;
       maxDelay?: number;
     };
   };
-} & AbstractChannelOptions;
+};
 export type AbstractClientOptionsFull = DeepRequired<AbstractClientOptions>;
 
 export const DefaultAbstractClientOptions: AbstractClientOptionsFull = merge(

@@ -10,7 +10,7 @@ import {DeepRequired} from "ts-essentials";
 import defaultsDeep from "lodash/defaultsDeep";
 import _ from "lodash";
 
-export type WsClientOptions = { url: string } & AbstractClientOptions;
+export type WsClientOptions = AbstractClientOptions & { url: string };
 export type WsClientOptionsFull = DeepRequired<WsClientOptions>;
 export const DefaultWsClientOptions = _.merge(
   {},

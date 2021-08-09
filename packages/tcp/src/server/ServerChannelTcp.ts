@@ -21,7 +21,7 @@ export class ServerChannelTcp<Context> extends AbstractServerChannel<Context> {
     protected readonly _server: RecallTcpServer,
     ctx: Context,
     dispatcher: ServiceDispatcher,
-    protected readonly _options: TcpServerOptionsFull,
+    protected readonly _options: TcpServerOptionsFull<Context>,
   ) {
     super(ctx, dispatcher, _options);
 

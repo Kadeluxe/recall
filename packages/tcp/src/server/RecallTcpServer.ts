@@ -4,23 +4,26 @@ import {ServerChannelTcp} from "~/server/ServerChannelTcp";
 import _ from "lodash";
 import {DeepRequired} from "ts-essentials";
 
-export type TcpServerOptions = {
-  maxMessageSize?: number
-} & AbstractServerOptions;
-export type TcpServerOptionsFull = DeepRequired<TcpServerOptions>;
-export const DefaultTcpServerOptions: TcpServerOptionsFull = _.merge(
+export type TcpServerOptions<Context> = AbstractServerOptions & {
+  maxMessageSize?: number,
+  contextFactory?: (channel: net.Socket) => Promise<Context> | Context;
+}
+
+export type TcpServerOptionsFull<Context> = DeepRequired<TcpServerOptions<Context>>;
+export const DefaultTcpServerOptions: TcpServerOptionsFull<any> = _.merge(
   {
     maxMessageSize: 100 * 1024 * 1024, // 100 MB
+    contextFactory: () => undefined,
   },
   DefaultAbstractServerOptions
 );
 
 export class RecallTcpServer<Context = unknown> extends AbstractServer<Context> {
   declare protected _clients: Set<ServerChannelTcp<Context>>;
-  public readonly options: TcpServerOptionsFull;
+  public readonly options: TcpServerOptionsFull<Context>;
   protected readonly _server = new net.Server();
 
-  public constructor(options: TcpServerOptions = {}) {
+  public constructor(options: TcpServerOptions<Context> = {}) {
     super(options);
     this.options = _.defaultsDeep(options, DefaultTcpServerOptions);
 
@@ -50,7 +53,8 @@ export class RecallTcpServer<Context = unknown> extends AbstractServer<Context> 
   }
 
   protected async onClientConnect(socket: net.Socket) {
-    const client = new ServerChannelTcp<Context>(socket, this, {} as any, this._dispatcher, this.options);
+    const context = await this.options.contextFactory(socket);
+    const client = new ServerChannelTcp<Context>(socket, this, context, this._dispatcher, this.options);
     this._clients.add(client);
 
     socket.once("close", () => this.onClientDisconnect(client));

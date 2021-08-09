@@ -9,9 +9,9 @@ import {
 } from "@kadeluxe/recall-core";
 import {ClientChannel} from "~/index";
 
-export type TcpClientOptions = {
+export type TcpClientOptions = AbstractClientOptions & {
   socket: net.SocketConnectOpts;
-} & AbstractClientOptions;
+};
 export type TcpClientOptionsFull = DeepRequired<TcpClientOptions>;
 export const DefaultTcpClientOptions = _.merge(
   {},

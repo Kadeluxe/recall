@@ -1,6 +1,7 @@
 import {
   AbstractServerChannel,
-  captureRequestContext, ChannelCloseReason,
+  captureRequestContext,
+  ChannelCloseReason,
   ChannelState,
   INotificationMessage,
   IRequestMessage,
@@ -16,7 +17,7 @@ export class ServerChannelWs<Context> extends AbstractServerChannel<Context> {
     protected readonly _server: RecallWsServer,
     ctx: Context,
     dispatcher: ServiceDispatcher,
-    protected readonly _options: WsServerOptionsFull
+    protected readonly _options: WsServerOptionsFull<Context>
   ) {
     super(ctx, dispatcher, _options);
 
